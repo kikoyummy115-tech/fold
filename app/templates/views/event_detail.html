@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Summer Music Fest 2026 | Smak Jit</title>
+
+    <!-- DaisyUI 5 & Tailwind Browser -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Material Symbols -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,600;0,6..72,700;1,6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      .font-serif-title {
+        font-family: "Newsreader", serif;
+      }
+      .brand-teal {
+        background-color: #4a615e;
+      }
+      .brand-teal:hover {
+        background-color: #3b4e4b;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-base-100 text-slate-800 antialiased min-h-screen flex flex-col justify-between"
+  >
+    <!-- ================= NAVBAR ================= -->
+    <header class="border-b border-slate-200 bg-white sticky top-0 z-40">
+      <div
+        class="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between"
+      >
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2">
+          <div
+            class="w-8 h-8 rounded-lg bg-[#4A615E] text-white flex items-center justify-center font-bold text-sm tracking-tighter"
+          >
+            sj
+          </div>
+          <span class="font-extrabold text-xl tracking-tight text-slate-900"
+            >Smak Jit</span
+          >
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav
+          class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600"
+        >
+          <a
+            href="{{ url_for('browse_events') if 'browse_events' in url_map else '#' }}"
+            class="hover:text-slate-900 transition-colors"
+            >Browse Events</a
+          >
+          <a href="#" class="hover:text-slate-900 transition-colors"
+            >For Vendors</a
+          >
+          <a href="#" class="hover:text-slate-900 transition-colors"
+            >For Volunteers</a
+          >
+        </nav>
+
+        <!-- Right Side Nav -->
+        <div class="flex items-center gap-5">
+          <button class="text-slate-600 hover:text-slate-900 cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">search</span>
+          </button>
+          <a
+            href="{{ url_for('auth.login') if 'auth.login' in url_map else '#' }}"
+            class="text-sm font-semibold text-slate-700 hover:text-slate-900"
+          >
+            Log In
+          </a>
+          <a
+            href="{{ url_for('auth.register') if 'auth.register' in url_map else '#' }}"
+            class="btn brand-teal text-white border-none rounded-lg px-5 min-h-[36px] h-[36px] text-xs font-semibold capitalize shadow-xs"
+          >
+            Sign Up
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="max-w-7xl mx-auto px-6 py-8 w-full">
+      <!-- Breadcrumbs -->
+      <nav class="text-xs text-slate-400 mb-4 flex items-center gap-1.5">
+        <a
+          href="{{ url_for('browse_events') if 'browse_events' in url_map else '#' }}"
+          class="hover:text-slate-600"
+          >Events</a
+        >
+        <span>&rsaquo;</span>
+        <span class="text-slate-600 font-medium">Summer Music Fest 2026</span>
+      </nav>
+
+      <!-- Event Header & Actions -->
+      <div
+        class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-100"
+      >
+        <div>
+          <h1
+            class="font-serif-title text-3xl md:text-4xl font-bold text-slate-900 mb-2"
+          >
+            Summer Music Fest 2026
+          </h1>
+          <div class="flex flex-wrap items-center gap-4 text-xs text-slate-500">
+            <div class="flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[16px]"
+                >calendar_today</span
+              >
+              <span>Sep 12-14, 2026</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[16px]"
+                >location_on</span
+              >
+              <span>Riverside Park, Austin TX</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[16px] text-[#4A615E]"
+                >verified_user</span
+              >
+              <span
+                >Hosted by
+                <strong class="text-slate-700 font-semibold"
+                  >Austin Events Co.</strong
+                ></span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="flex items-center gap-3">
+          <a
+            href="#volunteer-roles"
+            class="btn brand-teal text-white border-none rounded-lg px-5 h-10 min-h-[40px] text-xs font-semibold shadow-xs"
+          >
+            Volunteer for This Event
+          </a>
+          <a
+            href="#booth-map"
+            class="btn btn-outline border-slate-300 hover:border-slate-400 text-slate-700 bg-white rounded-lg px-5 h-10 min-h-[40px] text-xs font-semibold"
+          >
+            Book a Booth
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Banner Image -->
+      <div
+        class="mt-6 rounded-2xl overflow-hidden shadow-xs relative h-[320px] md:h-[400px]"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1600&q=80"
+          alt="Summer Music Fest Main Stage"
+          class="w-full h-full object-cover"
+        />
+      </div>
+
+      <!-- Navigation Sub-tabs -->
+      <div
+        class="flex border-b border-slate-200 mt-6 gap-8 text-xs font-medium"
+      >
+        <a
+          href="#about"
+          class="pb-3 border-b-2 border-[#4A615E] text-[#4A615E] font-semibold"
+          >Overview</a
+        >
+        <a
+          href="#volunteer-roles"
+          class="pb-3 text-slate-500 hover:text-slate-900 transition-colors"
+          >Volunteer Roles</a
+        >
+        <a
+          href="#booth-map"
+          class="pb-3 text-slate-500 hover:text-slate-900 transition-colors"
+          >Booth Map</a
+        >
+        <a
+          href="#schedule"
+          class="pb-3 text-slate-500 hover:text-slate-900 transition-colors"
+          >Schedule</a
+        >
+      </div>
+
+      <!-- Grid Content Layout: 8 cols (Details) + 4 cols (Sidebar) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mt-10 items-start">
+        <!-- Left Content Area -->
+        <div class="lg:col-span-8 space-y-12">
+          <!-- About the Event -->
+          <section id="about">
+            <h2 class="font-serif-title text-2xl font-bold text-slate-900 mb-3">
+              About the Event
+            </h2>
+            <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+              Welcome to Austin's premier outdoor Summer Music Fest 2026. This
+              year, we're expanding our community reach by uniting over 100
+              artists, local culinary vendors, and volunteers under the gorgeous
+              Austin canopy. This 3-day event features premium performance
+              stages, highly accessible check-ins, local art galleries, and a
+              centralized food truck square.
+            </p>
+          </section>
+
+          <!-- Active Volunteer Opportunities -->
+          <section id="volunteer-roles">
+            <h2 class="font-serif-title text-2xl font-bold text-slate-900 mb-4">
+              Active Volunteer Opportunities
+            </h2>
+            <div class="space-y-3">
+              <!-- Opportunity 1 -->
+              <div
+                class="border border-slate-200/90 rounded-xl p-4 bg-white flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+              >
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2">
+                    <h3 class="text-xs font-bold text-slate-900">
+                      Stage Setup and Tech Support
+                    </h3>
+                    <span
+                      class="badge badge-sm bg-rose-50 text-rose-600 border border-rose-200 text-[10px] font-semibold"
+                      >8 spots remaining</span
+                    >
+                  </div>
+                  <p class="text-[11px] text-slate-500">
+                    Assist backstage operations, coordinate stage logistics, and
+                    manage cabling shifts.
+                  </p>
+                </div>
+                <button
+                  class="btn btn-sm brand-teal text-white border-none rounded-lg text-xs font-semibold px-4 shrink-0"
+                >
+                  Apply
+                </button>
+              </div>
+
+              <!-- Opportunity 2 -->
+              <div
+                class="border border-slate-200/90 rounded-xl p-4 bg-white flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+              >
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2">
+                    <h3 class="text-xs font-bold text-slate-900">
+                      Guest Check-in and Greeters
+                    </h3>
+                    <span
+                      class="badge badge-sm bg-rose-50 text-rose-600 border border-rose-200 text-[10px] font-semibold"
+                      >5 spots remaining</span
+                    >
+                  </div>
+                  <p class="text-[11px] text-slate-500">
+                    Check in ticketholders, manage security wristbands, and
+                    guide attendees to corresponding zones.
+                  </p>
+                </div>
+                <button
+                  class="btn btn-sm brand-teal text-white border-none rounded-lg text-xs font-semibold px-4 shrink-0"
+                >
+                  Apply
+                </button>
+              </div>
+
+              <!-- Opportunity 3 -->
+              <div
+                class="border border-slate-200/90 rounded-xl p-4 bg-white flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+              >
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2">
+                    <h3 class="text-xs font-bold text-slate-900">
+                      Food and Beverage Helpers
+                    </h3>
+                    <span
+                      class="badge badge-sm bg-rose-50 text-rose-600 border border-rose-200 text-[10px] font-semibold"
+                      >12 spots remaining</span
+                    >
+                  </div>
+                  <p class="text-[11px] text-slate-500">
+                    Support local culinary pop-ups and maintain cleanliness
+                    within the central dining arena.
+                  </p>
+                </div>
+                <button
+                  class="btn btn-sm brand-teal text-white border-none rounded-lg text-xs font-semibold px-4 shrink-0"
+                >
+                  Apply
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Booth Spaces Layout Map Preview -->
+          <section id="booth-map">
+            <h2 class="font-serif-title text-2xl font-bold text-slate-900 mb-4">
+              Booth Spaces Layout Map
+            </h2>
+
+            <div class="border border-slate-200 rounded-2xl p-6 bg-slate-50/50">
+              <!-- Grid Header & Legend -->
+              <div
+                class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-slate-200/80 mb-6"
+              >
+                <span class="text-xs font-bold text-slate-800"
+                  >Austin Riverside Arena (Interactive Zone Map Preview)</span
+                >
+                <div class="flex items-center gap-4 text-[11px]">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-sm bg-emerald-600"></span>
+                    <span class="text-slate-600 font-medium">Available</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-sm bg-slate-300"></span>
+                    <span class="text-slate-600 font-medium">Booked</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Booth Spot Matrix Preview -->
+              <div
+                class="grid grid-cols-3 sm:grid-cols-6 gap-2.5 max-w-2xl mx-auto"
+              >
+                <!-- Row 1 -->
+                <div
+                  class="border border-slate-200 bg-slate-100 rounded-lg py-3 text-center opacity-60"
+                >
+                  <div class="text-[11px] font-bold text-slate-500">A1</div>
+                  <div class="text-[10px] text-slate-400">$300</div>
+                </div>
+                <div
+                  class="border border-emerald-500 bg-emerald-50 rounded-lg py-3 text-center cursor-pointer hover:bg-emerald-100 transition-colors"
+                >
+                  <div class="text-[11px] font-bold text-emerald-800">A2</div>
+                  <div class="text-[10px] text-emerald-700">$300</div>
+                </div>
+                <div
+                  class="border border-emerald-500 bg-emerald-50 rounded-lg py-3 text-center cursor-pointer hover:bg-emerald-100 transition-colors"
+                >
+                  <div class="text-[11px] font-bold text-emerald-800">A3</div>
+                  <div class="text-[10px] text-emerald-700">$300</div>
+                </div>
+                <div
+                  class="border border-slate-200 bg-slate-100 rounded-lg py-3 text-center opacity-60"
+                >
+                  <div class="text-[11px] font-bold text-slate-500">A4</div>
+                  <div class="text-[10px] text-slate-400">$300</div>
+                </div>
+                <div
+                  class="border border-emerald-500 bg-emerald-50 rounded-lg py-3 text-center cursor-pointer hover:bg-emerald-100 transition-colors"
+                >
+                  <div class="text-[11px] font-bold text-emerald-800">A5</div>
+                  <div class="text-[10px] text-emerald-700">$300</div>
+                </div>
+                <div
+                  class="border border-emerald-500 bg-emerald-50 rounded-lg py-3 text-center cursor-pointer hover:bg-emerald-100 transition-colors"
+                >
+                  <div class="text-[11px] font-bold text-emerald-800">A6</div>
+                  <div class="text-[10px] text-emerald-700">$300</div>
+                </div>
+
+                <!-- Row 2 -->
+                <div
+                  class="border border-emerald-500 bg-emerald-50 rounded-lg py-3 text-center cursor-pointer hover:bg-emerald-100 transition-colors"
+                >
+                  <div class="text-[11px] font-bold text-emerald-800">A7</div>
+                  <div class="text-[10px] text-emerald-700">$350</div>
+                </div>
+                <div
+                  class="border border-emerald-500 bg-emerald-50 rounded-lg py-3 text-center cursor-pointer hover:bg-emerald-100 transition-colors"
+                >
+                  <div class="text-[11px] font-bold text-emerald-800">A8</div>
+                  <div class="text-[10px] text-emerald-700">$350</div>
+                </div>
+                <div
+                  class="border border-slate-200 bg-slate-100 rounded-lg py-3 text-center opacity-60"
+                >
+                  <div class="text-[11px] font-bold text-slate-500">A9</div>
+                  <div class="text-[10px] text-slate-400">$350</div>
+                </div>
+                <div
+                  class="border border-emerald-500 bg-emerald-50 rounded-lg py-3 text-center cursor-pointer hover:bg-emerald-100 transition-colors"
+                >
+                  <div class="text-[11px] font-bold text-emerald-800">A10</div>
+                  <div class="text-[10px] text-emerald-700">$350</div>
+                </div>
+                <div
+                  class="border border-emerald-500 bg-emerald-50 rounded-lg py-3 text-center cursor-pointer hover:bg-emerald-100 transition-colors"
+                >
+                  <div class="text-[11px] font-bold text-emerald-800">A11</div>
+                  <div class="text-[10px] text-emerald-700">$350</div>
+                </div>
+                <div
+                  class="border border-slate-200 bg-slate-100 rounded-lg py-3 text-center opacity-60"
+                >
+                  <div class="text-[11px] font-bold text-slate-500">A12</div>
+                  <div class="text-[10px] text-slate-400">$350</div>
+                </div>
+
+                <!-- Row 3 -->
+                <div
+                  class="border border-emerald-500 bg-emerald-50 rounded-lg py-3 text-center cursor-pointer hover:bg-emerald-100 transition-colors"
+                >
+                  <div class="text-[11px] font-bold text-emerald-800">A13</div>
+                  <div class="text-[10px] text-emerald-700">$400</div>
+                </div>
+                <div
+                  class="border border-slate-200 bg-slate-100 rounded-lg py-3 text-center opacity-60"
+                >
+                  <div class="text-[11px] font-bold text-slate-500">A14</div>
+                  <div class="text-[10px] text-slate-400">$400</div>
+                </div>
+                <div
+                  class="border border-emerald-500 bg-emerald-50 rounded-lg py-3 text-center cursor-pointer hover:bg-emerald-100 transition-colors"
+                >
+                  <div class="text-[11px] font-bold text-emerald-800">A15</div>
+                  <div class="text-[10px] text-emerald-700">$400</div>
+                </div>
+                <div
+                  class="border border-emerald-500 bg-emerald-50 rounded-lg py-3 text-center cursor-pointer hover:bg-emerald-100 transition-colors"
+                >
+                  <div class="text-[11px] font-bold text-emerald-800">A16</div>
+                  <div class="text-[10px] text-emerald-700">$400</div>
+                </div>
+                <div
+                  class="border border-slate-200 bg-slate-100 rounded-lg py-3 text-center opacity-60"
+                >
+                  <div class="text-[11px] font-bold text-slate-500">A17</div>
+                  <div class="text-[10px] text-slate-400">$400</div>
+                </div>
+                <div
+                  class="border border-emerald-500 bg-emerald-50 rounded-lg py-3 text-center cursor-pointer hover:bg-emerald-100 transition-colors"
+                >
+                  <div class="text-[11px] font-bold text-emerald-800">A18</div>
+                  <div class="text-[10px] text-emerald-700">$400</div>
+                </div>
+              </div>
+
+              <!-- Footer info & link -->
+              <div
+                class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-6 border-t border-slate-200/80 mt-6 text-xs"
+              >
+                <span class="text-slate-500"
+                  >Pricing varies between $300 and $500 depending on location
+                  premium tier.</span
+                >
+                <a
+                  href="#"
+                  class="font-bold text-[#0d8b99] hover:underline flex items-center gap-1"
+                >
+                  Go to interactive map &amp; booking floor &rarr;
+                </a>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Right Sidebar Area -->
+        <aside class="lg:col-span-4 space-y-6">
+          <!-- Widget 1: Key Event Metrics -->
+          <div
+            class="border border-slate-200 rounded-2xl p-6 bg-white shadow-xs"
+          >
+            <h3 class="font-serif-title text-xl font-bold text-slate-900 mb-5">
+              Key Event Metrics
+            </h3>
+
+            <div class="space-y-4 text-xs">
+              <!-- Metric 1 -->
+              <div class="flex items-start gap-3">
+                <span
+                  class="material-symbols-outlined text-slate-400 text-[20px] mt-0.5"
+                  >groups</span
+                >
+                <div>
+                  <span
+                    class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider"
+                    >Expected Attendance</span
+                  >
+                  <span class="font-bold text-slate-900">5,000+ Visitors</span>
+                </div>
+              </div>
+
+              <!-- Metric 2 -->
+              <div class="flex items-start gap-3">
+                <span
+                  class="material-symbols-outlined text-slate-400 text-[20px] mt-0.5"
+                  >music_note</span
+                >
+                <div>
+                  <span
+                    class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider"
+                    >Event Classification</span
+                  >
+                  <span class="font-bold text-slate-900">Music Festival</span>
+                </div>
+              </div>
+
+              <!-- Metric 3 -->
+              <div class="flex items-start gap-3">
+                <span
+                  class="material-symbols-outlined text-slate-400 text-[20px] mt-0.5"
+                  >schedule</span
+                >
+                <div>
+                  <span
+                    class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider"
+                    >Duration</span
+                  >
+                  <span class="font-bold text-slate-900">3 Days Active</span>
+                </div>
+              </div>
+
+              <!-- Metric 4 -->
+              <div class="flex items-start gap-3">
+                <span
+                  class="material-symbols-outlined text-slate-400 text-[20px] mt-0.5"
+                  >store</span
+                >
+                <div>
+                  <span
+                    class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider"
+                    >Vendor Slots</span
+                  >
+                  <span class="font-bold text-slate-900">45 Total Booths</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Widget 2: Accepted Vendors -->
+          <div
+            class="border border-slate-200 rounded-2xl p-6 bg-white shadow-xs"
+          >
+            <h3 class="font-serif-title text-xl font-bold text-slate-900 mb-4">
+              Accepted Vendors
+            </h3>
+
+            <div class="space-y-3.5 text-xs">
+              <div>
+                <strong class="font-bold text-slate-900 block mb-0.5"
+                  >Food &amp; Beverage</strong
+                >
+                <p class="text-slate-500 leading-relaxed text-[11px]">
+                  Food trucks, artisanal drinks, organic bakes.
+                </p>
+              </div>
+
+              <div>
+                <strong class="font-bold text-slate-900 block mb-0.5"
+                  >Merchandise</strong
+                >
+                <p class="text-slate-500 leading-relaxed text-[11px]">
+                  Custom apparel, vinyl records, local prints.
+                </p>
+              </div>
+
+              <div>
+                <strong class="font-bold text-slate-900 block mb-0.5"
+                  >Services / Arts &amp; Crafts</strong
+                >
+                <p class="text-slate-500 leading-relaxed text-[11px]">
+                  Facepainting, message kiosks, handmade soaps.
+                </p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-[#435b57] text-white pt-16 pb-10 mt-20">
+      <div class="max-w-7xl mx-auto px-6">
+        <div
+          class="grid grid-cols-1 md:grid-cols-5 gap-10 pb-12 border-b border-white/10"
+        >
+          <div class="md:col-span-2 space-y-4">
+            <div class="flex items-center gap-2">
+              <div
+                class="w-7 h-7 rounded-lg bg-white/20 text-white flex items-center justify-center font-bold text-xs tracking-tighter"
+              >
+                sj
+              </div>
+              <span class="font-bold text-lg tracking-tight">Smak Jit</span>
+            </div>
+            <p class="text-xs text-gray-300 leading-relaxed max-w-xs">
+              Streamlining event operations for volunteers, vendors, and
+              organizers worldwide.
+            </p>
+          </div>
+
+          <div>
+            <h4
+              class="text-xs font-bold uppercase tracking-wider text-white/90 mb-4"
+            >
+              Platform
+            </h4>
+            <ul class="space-y-2 text-xs text-gray-300">
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Find Events</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >For Vendors</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >For Volunteers</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Host an Event</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4
+              class="text-xs font-bold uppercase tracking-wider text-white/90 mb-4"
+            >
+              Resources
+            </h4>
+            <ul class="space-y-2 text-xs text-gray-300">
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors">Blog</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Help Center</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4
+              class="text-xs font-bold uppercase tracking-wider text-white/90 mb-4"
+            >
+              Legal
+            </h4>
+            <ul class="space-y-2 text-xs text-gray-300">
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Terms of Service</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >SLA Agreement</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-300/80"
+        >
+          <p>
+            &copy; {{ current_year or '2026' }} BoothSpot Inc. All rights
+            reserved.
+          </p>
+          <div class="flex items-center gap-3">
+            <a
+              href="#"
+              class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+            >
+              <span class="text-xs font-bold">X</span>
+            </a>
+            <a
+              href="#"
+              class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+            >
+              <span class="text-xs font-bold">f</span>
+            </a>
+            <a
+              href="#"
+              class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+            >
+              <span class="text-xs font-bold">in</span>
+            </a>
+            <a
+              href="#"
+              class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+            >
+              <span class="text-xs font-bold">ig</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
