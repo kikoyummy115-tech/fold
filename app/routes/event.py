@@ -24,6 +24,12 @@ def manage_event():
     return render_template('views/manage_event.html')
 
 
+@event.route('/manage-vendor')
+@login_required
+@permission_required(['manage_service'])
+def manage_vendor():
+    return render_template('views/manage_vendor.html')
+
 @event.route('/new', methods=["GET", 'POST'])
 @login_required
 @permission_required(['manage_event'])

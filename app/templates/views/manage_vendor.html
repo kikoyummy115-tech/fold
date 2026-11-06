@@ -1,0 +1,330 @@
+{% extends 'base.html' %}
+
+{% block title %}<title> Booth Management - Summer Music Fest 2026 </title>{% endblock %}
+
+{% block content %}
+<div class="space-y-6 m-10">
+
+  <!-- Top Breadcrumbs & Page Header -->
+  <div class="space-y-2">
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs text-xs text-base-content/60 py-0">
+      <ul>
+        <li><a href="{{ url_for('event.manage_event') }}" class="hover:underline">My Events</a></li>
+        <li><a href="#" class="hover:underline">Summer Music Fest 2026</a></li>
+        <li class="font-semibold text-base-content">Booth Management</li>
+      </ul>
+    </div>
+
+    <!-- Title and Action Buttons -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-1">
+      <div class="flex items-center gap-3">
+        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-base-content">
+          Summer Music Fest 2026
+        </h1>
+        <span class="badge badge-success badge-soft font-semibold text-xs px-2.5 py-1 rounded-full">
+          Active Event
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2.5">
+        <button type="button" class="btn btn-sm btn-ghost bg-base-100 hover:bg-base-200 border border-base-300 font-medium rounded-xl text-xs px-4">
+          Export List
+        </button>
+        <button type="button" class="btn btn-sm bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl text-xs px-4 border-none shadow-xs">
+          Add Booth Slot
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="border-b border-base-200">
+    <div class="flex gap-8 text-sm font-medium">
+      <a href="#" class="pb-3 text-base-content/60 hover:text-base-content">Overview</a>
+      <a href="#" class="pb-3 text-base-content/60 hover:text-base-content">Volunteers</a>
+      <a href="#" class="pb-3 text-indigo-600 font-bold border-b-2 border-indigo-600 -mb-px">Booths</a>
+      <a href="#" class="pb-3 text-base-content/60 hover:text-base-content">Schedule</a>
+      <a href="#" class="pb-3 text-base-content/60 hover:text-base-content">Analytics</a>
+    </div>
+  </div>
+
+  <!-- Metric / Stat Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <!-- Stat 1 -->
+    <div class="card bg-base-100 shadow-sm border border-base-200 p-5 rounded-2xl">
+      <span class="text-[11px] font-bold uppercase tracking-wider text-base-content/50">Total Available Slots</span>
+      <div class="text-2xl font-extrabold text-base-content mt-2">20 Booths</div>
+      <div class="text-xs text-base-content/50 mt-1">Interactive plan view</div>
+    </div>
+
+    <!-- Stat 2 -->
+    <div class="card bg-base-100 shadow-sm border border-base-200 p-5 rounded-2xl">
+      <span class="text-[11px] font-bold uppercase tracking-wider text-base-content/50">Booked Slots</span>
+      <div class="text-2xl font-extrabold text-indigo-600 mt-2">14 Slots</div>
+      <div class="text-xs text-base-content/50 mt-1">Revenue secured</div>
+    </div>
+
+    <!-- Stat 3 -->
+    <div class="card bg-base-100 shadow-sm border border-base-200 p-5 rounded-2xl">
+      <span class="text-[11px] font-bold uppercase tracking-wider text-base-content/50">Pending Approvals</span>
+      <div class="text-2xl font-extrabold text-amber-500 mt-2">3 Review</div>
+      <div class="text-xs text-base-content/50 mt-1">Requires coordinator action</div>
+    </div>
+
+    <!-- Stat 4 -->
+    <div class="card bg-base-100 shadow-sm border border-base-200 p-5 rounded-2xl">
+      <span class="text-[11px] font-bold uppercase tracking-wider text-base-content/50">Open Positions</span>
+      <div class="text-2xl font-extrabold text-emerald-600 mt-2">3 Left</div>
+      <div class="text-xs text-base-content/50 mt-1">Highly visible floor zone</div>
+    </div>
+  </div>
+
+  <!-- Visual Arena Allocation Floor Map -->
+  <div class="card bg-base-100 border border-base-200 shadow-sm p-6 rounded-2xl space-y-4">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <h2 class="text-sm font-bold text-base-content">Visual Arena Allocation Floor Map</h2>
+      
+      <!-- Legend -->
+      <div class="flex flex-wrap items-center gap-4 text-xs text-base-content/70">
+        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-xs bg-emerald-500"></span> Available</span>
+        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-xs bg-indigo-600"></span> Booked</span>
+        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-xs bg-amber-500"></span> Pending</span>
+        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-xs bg-slate-400"></span> Blocked</span>
+      </div>
+    </div>
+
+    <!-- Grid Layout (Row A1-A10 & Row A11-A20) -->
+    <div class="overflow-x-auto pt-2 pb-1">
+      <div class="min-w-[850px] space-y-3">
+        <!-- Top Row: A1 - A10 -->
+        <div class="grid grid-cols-10 gap-2">
+          <!-- A1 Booked -->
+          <div class="p-2.5 border-2 border-indigo-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs">A1</div>
+            <div class="text-[9px] text-base-content/50">10x10</div>
+          </div>
+          <!-- A2 Booked -->
+          <div class="p-2.5 border-2 border-indigo-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs">A2</div>
+            <div class="text-[9px] text-base-content/50">10x10</div>
+          </div>
+          <!-- A3 Available -->
+          <div class="p-2.5 border-2 border-emerald-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs text-emerald-600">A3</div>
+            <div class="text-[9px] text-emerald-600">10x10</div>
+          </div>
+          <!-- A4 Booked -->
+          <div class="p-2.5 border-2 border-indigo-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs">A4</div>
+            <div class="text-[9px] text-base-content/50">10x10</div>
+          </div>
+          <!-- A5 Available -->
+          <div class="p-2.5 border-2 border-emerald-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs text-emerald-600">A5</div>
+            <div class="text-[9px] text-emerald-600">10x10</div>
+          </div>
+          <!-- A6 Pending -->
+          <div class="p-2.5 border-2 border-amber-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs text-amber-600">A6</div>
+            <div class="text-[9px] text-amber-600">10x20</div>
+          </div>
+          <!-- A7 Booked -->
+          <div class="p-2.5 border-2 border-indigo-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs">A7</div>
+            <div class="text-[9px] text-base-content/50">10x10</div>
+          </div>
+          <!-- A8 Booked -->
+          <div class="p-2.5 border-2 border-indigo-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs">A8</div>
+            <div class="text-[9px] text-base-content/50">10x10</div>
+          </div>
+          <!-- A9 Available -->
+          <div class="p-2.5 border-2 border-emerald-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs text-emerald-600">A9</div>
+            <div class="text-[9px] text-emerald-600">10x10</div>
+          </div>
+          <!-- A10 Booked -->
+          <div class="p-2.5 border-2 border-indigo-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs">A10</div>
+            <div class="text-[9px] text-base-content/50">10x10</div>
+          </div>
+        </div>
+
+        <!-- Bottom Row: A11 - A20 -->
+        <div class="grid grid-cols-10 gap-2">
+          <!-- A11 Booked -->
+          <div class="p-2.5 border-2 border-indigo-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs">A11</div>
+            <div class="text-[9px] text-base-content/50">10x10</div>
+          </div>
+          <!-- A12 Booked -->
+          <div class="p-2.5 border-2 border-indigo-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs">A12</div>
+            <div class="text-[9px] text-base-content/50">10x10</div>
+          </div>
+          <!-- A13 Booked -->
+          <div class="p-2.5 border-2 border-indigo-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs">A13</div>
+            <div class="text-[9px] text-base-content/50">10x10</div>
+          </div>
+          <!-- A14 Available -->
+          <div class="p-2.5 border-2 border-emerald-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs text-emerald-600">A14</div>
+            <div class="text-[9px] text-emerald-600">10x10</div>
+          </div>
+          <!-- A15 Booked -->
+          <div class="p-2.5 border-2 border-indigo-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs">A15</div>
+            <div class="text-[9px] text-base-content/50">10x10</div>
+          </div>
+          <!-- A16 Available -->
+          <div class="p-2.5 border-2 border-emerald-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs text-emerald-600">A16</div>
+            <div class="text-[9px] text-emerald-600">10x10</div>
+          </div>
+          <!-- A17 Booked -->
+          <div class="p-2.5 border-2 border-indigo-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs">A17</div>
+            <div class="text-[9px] text-base-content/50">10x10</div>
+          </div>
+          <!-- A18 Booked -->
+          <div class="p-2.5 border-2 border-indigo-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs">A18</div>
+            <div class="text-[9px] text-base-content/50">10x10</div>
+          </div>
+          <!-- A19 Booked -->
+          <div class="p-2.5 border-2 border-indigo-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs">A19</div>
+            <div class="text-[9px] text-base-content/50">10x10</div>
+          </div>
+          <!-- A20 Available -->
+          <div class="p-2.5 border-2 border-emerald-500 rounded-xl text-center bg-base-100">
+            <div class="font-bold text-xs text-emerald-600">A20</div>
+            <div class="text-[9px] text-emerald-600">10x10</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter & Table Section -->
+  <div class="card bg-base-100 border border-base-200 shadow-sm p-6 rounded-2xl space-y-4">
+    <!-- Filter Toolbar -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <!-- Search input -->
+      <div class="relative w-full sm:w-80">
+        <span class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-base-content/40">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </span>
+        <input 
+          type="search" 
+          placeholder="Filter booth ID or Vendor name..." 
+          class="input input-sm input-bordered w-full pl-9 rounded-xl text-xs bg-base-200/40 focus:bg-base-100"
+        />
+      </div>
+
+      <!-- Dropdown Selects -->
+      <div class="flex items-center gap-2 self-end sm:self-auto">
+        <select class="select select-sm select-bordered rounded-xl text-xs font-normal">
+          <option selected>All Categories</option>
+          <option>Craft & Woodwork</option>
+          <option>Food & Beverage</option>
+          <option>Art & Prints</option>
+        </select>
+
+        <select class="select select-sm select-bordered rounded-xl text-xs font-normal">
+          <option selected>Status: All</option>
+          <option>Booked</option>
+          <option>Pending Review</option>
+          <option>Available</option>
+          <option>Blocked</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Data Table -->
+    <div class="overflow-x-auto">
+      <table class="table w-full text-xs">
+        <thead>
+          <tr class="text-[10px] uppercase font-bold tracking-wider text-base-content/40 border-b border-base-200">
+            <th class="py-3 font-semibold">Booth ID</th>
+            <th class="py-3 font-semibold">Vendor Name</th>
+            <th class="py-3 font-semibold">Category</th>
+            <th class="py-3 font-semibold">Size</th>
+            <th class="py-3 font-semibold">Price</th>
+            <th class="py-3 font-semibold">Status</th>
+            <th class="py-3 font-semibold text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-base-200/50">
+          <!-- Row 1 -->
+          <tr>
+            <td class="font-bold py-3.5 text-base-content">A12</td>
+            <td class="font-medium text-base-content">Artisan Goods Co.</td>
+            <td class="text-base-content/70">Craft & Woodwork</td>
+            <td class="text-base-content/70">10x10 ft</td>
+            <td class="font-bold text-base-content">$250</td>
+            <td>
+              <span class="badge badge-success badge-soft font-semibold text-[11px] rounded-md px-2 py-0.5">Booked</span>
+            </td>
+            <td class="text-right space-x-2">
+              <a href="#" class="font-semibold text-indigo-600 hover:underline">Edit</a>
+              <a href="#" class="font-semibold text-rose-500 hover:underline">Message</a>
+            </td>
+          </tr>
+
+          <!-- Row 2 -->
+          <tr>
+            <td class="font-bold py-3.5 text-base-content">A02</td>
+            <td class="font-medium text-base-content">Luna Pastries</td>
+            <td class="text-base-content/70">Food & Beverage</td>
+            <td class="text-base-content/70">10x20 ft</td>
+            <td class="font-bold text-base-content">$350</td>
+            <td>
+              <span class="badge badge-warning badge-soft font-semibold text-[11px] rounded-md px-2 py-0.5">Pending Review</span>
+            </td>
+            <td class="text-right space-x-2">
+              <a href="#" class="font-semibold text-indigo-600 hover:underline">Edit</a>
+              <a href="#" class="font-semibold text-rose-500 hover:underline">Message</a>
+            </td>
+          </tr>
+
+          <!-- Row 3 -->
+          <tr>
+            <td class="font-bold py-3.5 text-base-content">A05</td>
+            <td class="font-medium text-base-content">Austin Prints Co.</td>
+            <td class="text-base-content/70">Art & Prints</td>
+            <td class="text-base-content/70">10x10 ft</td>
+            <td class="font-bold text-base-content">$250</td>
+            <td>
+              <span class="badge badge-info badge-soft font-semibold text-[11px] rounded-md px-2 py-0.5">Available</span>
+            </td>
+            <td class="text-right space-x-2">
+              <a href="#" class="font-semibold text-indigo-600 hover:underline">Edit</a>
+              <a href="#" class="font-semibold text-rose-500 hover:underline">Message</a>
+            </td>
+          </tr>
+
+          <!-- Row 4 -->
+          <tr>
+            <td class="font-bold py-3.5 text-base-content">A08</td>
+            <td class="text-base-content/40">—</td>
+            <td class="text-base-content/70">Unassigned</td>
+            <td class="text-base-content/70">10x10 ft</td>
+            <td class="font-bold text-base-content">$300</td>
+            <td>
+              <span class="badge badge-ghost font-semibold text-[11px] rounded-md px-2 py-0.5 bg-slate-100 text-slate-500">Blocked</span>
+            </td>
+            <td class="text-right space-x-2">
+              <a href="#" class="font-semibold text-indigo-600 hover:underline">Edit</a>
+              <a href="#" class="font-semibold text-rose-500 hover:underline">Message</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
