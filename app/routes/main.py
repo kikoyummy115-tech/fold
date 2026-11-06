@@ -28,6 +28,8 @@ def events():
 @main.route('/event-detail')
 def event_detail():
     return render_template('views/event_detail.html')
+
+
     
 @main.route('/dashboard')
 @login_required

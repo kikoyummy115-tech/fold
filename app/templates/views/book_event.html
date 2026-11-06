@@ -1,0 +1,313 @@
+{% extends 'base.html' %}
+
+{% block title %} <title>Booth Selection - Smak Jit</title>{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto space-y-6 pb-12">
+
+  <!-- Top Navigation / Steps Bar -->
+  <div class="flex flex-col sm:flex-row items-center justify-between pb-4 border-b border-base-200 gap-4">
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-full bg-slate-700 text-white flex items-center justify-center font-bold text-sm">S</div>
+      <span class="font-bold text-lg tracking-tight">Smak Jit</span>
+    </div>
+    
+    <div class="text-xs text-base-content/60 font-medium">
+      Registering for: <span class="font-bold text-base-content">Summer Music Fest 2026</span>
+    </div>
+
+    <a href="{{ url_for('event.manage_event') }}" class="text-xs font-semibold text-rose-500 hover:underline">
+      Cancel & Exit
+    </a>
+  </div>
+
+  <!-- Wizard Steps -->
+  <div class="w-full flex justify-center py-2">
+    <ul class="steps steps-horizontal w-full max-w-2xl text-xs">
+      <li class="step step-neutral font-semibold">Select Booth</li>
+      <li class="step text-base-content/50">Vendor Details</li>
+      <li class="step text-base-content/50">Payment Info</li>
+      <li class="step text-base-content/50">Confirm Booking</li>
+    </ul>
+  </div>
+
+  <!-- Filter Category Badges -->
+  <div class="space-y-1.5">
+    <span class="text-[10px] uppercase font-bold tracking-wider text-base-content/50">Booth Category Codes</span>
+    <div class="flex flex-wrap gap-2">
+      <button type="button" class="btn btn-xs rounded-full border-base-300 bg-base-100 font-normal hover:border-base-400">Food & Beverage (F-Block)</button>
+      <button type="button" class="btn btn-xs rounded-full border-base-300 bg-base-100 font-normal hover:border-base-400">Merchandise (M-Block)</button>
+      <button type="button" class="btn btn-xs rounded-full border-base-300 bg-base-100 font-normal hover:border-base-400">Arts & Crafts (C-Block)</button>
+      <button type="button" class="btn btn-xs rounded-full border-base-300 bg-base-100 font-normal hover:border-base-400">Services (S-Block)</button>
+    </div>
+  </div>
+
+  <!-- Main Content Layout (Grid + Checkout Summary) -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+    <!-- Left: Meadow Ground Layout Plan (7 Cols) -->
+    <div class="card bg-base-100 border border-base-200 shadow-sm p-5 sm:p-6 rounded-2xl lg:col-span-7 space-y-5">
+      
+      <!-- Layout Header & Legend -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h2 class="font-bold text-base text-base-content">Riverside Park Festival Meadow (Ground Layout Plan)</h2>
+          <div class="flex items-center gap-4 text-[11px] mt-2">
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-emerald-500"></span> Available</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-pink-500"></span> Selected</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-slate-200 border border-slate-300"></span> Occupied</span>
+          </div>
+        </div>
+        <button type="button" class="btn btn-sm bg-base-200 hover:bg-base-300 text-xs font-medium border-none self-start sm:self-auto rounded-lg">
+          View actual layout
+        </button>
+      </div>
+
+      <!-- M-BLOCK ROW -->
+      <div class="space-y-2">
+        <span class="text-[10px] font-bold text-base-content/50 uppercase tracking-wider">M-Block (Merchandise Rows)</span>
+        <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+          <!-- Occupied -->
+          <div class="p-2 border border-base-300 bg-base-200/50 rounded-xl text-center opacity-60">
+            <div class="font-bold text-xs text-base-content/70">M12</div>
+            <div class="text-[9px] text-base-content/50">View details</div>
+          </div>
+          <!-- Available -->
+          <button type="button" class="p-2 border-2 border-emerald-500 bg-base-100 rounded-xl text-center hover:bg-emerald-50/40 transition">
+            <div class="font-bold text-xs text-emerald-700">M13</div>
+            <div class="text-[9px] text-emerald-600">View details</div>
+          </button>
+          <!-- Occupied -->
+          <div class="p-2 border border-base-300 bg-base-200/50 rounded-xl text-center opacity-60">
+            <div class="font-bold text-xs text-base-content/70">M14</div>
+            <div class="text-[9px] text-base-content/50">View details</div>
+          </div>
+          <!-- Selected -->
+          <button type="button" class="p-2 border-2 border-pink-500 bg-pink-50/50 rounded-xl text-center shadow-xs">
+            <div class="font-bold text-xs text-pink-600">M15</div>
+            <div class="text-[9px] text-pink-500">View details</div>
+          </button>
+          <!-- Available -->
+          <button type="button" class="p-2 border-2 border-emerald-500 bg-base-100 rounded-xl text-center hover:bg-emerald-50/40 transition">
+            <div class="font-bold text-xs text-emerald-700">M16</div>
+            <div class="text-[9px] text-emerald-600">View details</div>
+          </button>
+          <!-- Available -->
+          <button type="button" class="p-2 border-2 border-emerald-500 bg-base-100 rounded-xl text-center hover:bg-emerald-50/40 transition">
+            <div class="font-bold text-xs text-emerald-700">M17</div>
+            <div class="text-[9px] text-emerald-600">View details</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- F-BLOCK ROW -->
+      <div class="space-y-2">
+        <span class="text-[10px] font-bold text-base-content/50 uppercase tracking-wider">F-Block (Food & Beverage Rows)</span>
+        <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+          <!-- Available -->
+          <button type="button" class="p-2 border-2 border-emerald-500 bg-base-100 rounded-xl text-center hover:bg-emerald-50/40 transition">
+            <div class="font-bold text-xs text-emerald-700">F12</div>
+            <div class="text-[9px] text-emerald-600">View details</div>
+          </button>
+          <!-- Occupied -->
+          <div class="p-2 border border-base-300 bg-base-200/50 rounded-xl text-center opacity-60">
+            <div class="font-bold text-xs text-base-content/70">F13</div>
+            <div class="text-[9px] text-base-content/50">View details</div>
+          </div>
+          <!-- Occupied -->
+          <div class="p-2 border border-base-300 bg-base-200/50 rounded-xl text-center opacity-60">
+            <div class="font-bold text-xs text-base-content/70">F14</div>
+            <div class="text-[9px] text-base-content/50">View details</div>
+          </div>
+          <!-- Available -->
+          <button type="button" class="p-2 border-2 border-emerald-500 bg-base-100 rounded-xl text-center hover:bg-emerald-50/40 transition">
+            <div class="font-bold text-xs text-emerald-700">F15</div>
+            <div class="text-[9px] text-emerald-600">View details</div>
+          </button>
+          <!-- Occupied -->
+          <div class="p-2 border border-base-300 bg-base-200/50 rounded-xl text-center opacity-60">
+            <div class="font-bold text-xs text-base-content/70">F16</div>
+            <div class="text-[9px] text-base-content/50">View details</div>
+          </div>
+          <!-- Available -->
+          <button type="button" class="p-2 border-2 border-emerald-500 bg-base-100 rounded-xl text-center hover:bg-emerald-50/40 transition">
+            <div class="font-bold text-xs text-emerald-700">F17</div>
+            <div class="text-[9px] text-emerald-600">View details</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- C-BLOCK ROW -->
+      <div class="space-y-2">
+        <span class="text-[10px] font-bold text-base-content/50 uppercase tracking-wider">C-Block (Arts & Crafts Rows)</span>
+        <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+          <!-- Available -->
+          <button type="button" class="p-2 border-2 border-emerald-500 bg-base-100 rounded-xl text-center hover:bg-emerald-50/40 transition">
+            <div class="font-bold text-xs text-emerald-700">C12</div>
+            <div class="text-[9px] text-emerald-600">View details</div>
+          </button>
+          <!-- Available -->
+          <button type="button" class="p-2 border-2 border-emerald-500 bg-base-100 rounded-xl text-center hover:bg-emerald-50/40 transition">
+            <div class="font-bold text-xs text-emerald-700">C13</div>
+            <div class="text-[9px] text-emerald-600">View details</div>
+          </button>
+          <!-- Occupied -->
+          <div class="p-2 border border-base-300 bg-base-200/50 rounded-xl text-center opacity-60">
+            <div class="font-bold text-xs text-base-content/70">C14</div>
+            <div class="text-[9px] text-base-content/50">View details</div>
+          </div>
+          <!-- Available -->
+          <button type="button" class="p-2 border-2 border-emerald-500 bg-base-100 rounded-xl text-center hover:bg-emerald-50/40 transition">
+            <div class="font-bold text-xs text-emerald-700">C15</div>
+            <div class="text-[9px] text-emerald-600">View details</div>
+          </button>
+          <!-- Available -->
+          <button type="button" class="p-2 border-2 border-emerald-500 bg-base-100 rounded-xl text-center hover:bg-emerald-50/40 transition">
+            <div class="font-bold text-xs text-emerald-700">C16</div>
+            <div class="text-[9px] text-emerald-600">View details</div>
+          </button>
+          <!-- Occupied -->
+          <div class="p-2 border border-base-300 bg-base-200/50 rounded-xl text-center opacity-60">
+            <div class="font-bold text-xs text-base-content/70">C17</div>
+            <div class="text-[9px] text-base-content/50">View details</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right: Selected Booth & Upgrades Summary (5 Cols) -->
+    <div class="space-y-3 lg:col-span-5">
+      <div class="card bg-base-100 border border-base-200 shadow-sm p-6 rounded-2xl space-y-4">
+        
+        <div class="flex items-center justify-between">
+          <h3 class="font-serif font-bold text-base text-base-content">Selected: Booth #M15</h3>
+          <span class="badge badge-sm uppercase font-semibold text-[10px] tracking-wider bg-base-200 border-none text-base-content/70">Premium</span>
+        </div>
+
+        <div class="space-y-2 text-xs border-b border-base-200 pb-4">
+          <div class="flex justify-between">
+            <span class="text-base-content/60">Booth Dimensions</span>
+            <span class="font-medium">10 x 15 Ft Square</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-base-content/60">Zone Location</span>
+            <span class="font-medium text-right">Main Entrance walk-through block</span>
+          </div>
+          <div class="flex justify-between items-start">
+            <span class="text-base-content/60">Amenities Included</span>
+            <span class="font-medium text-right text-[11px] leading-relaxed">
+              1 folding table<br />
+              2 standard chairs<br />
+              120V outlet
+            </span>
+          </div>
+          <div class="flex justify-between pt-1">
+            <span class="text-base-content/60">Base Pricing</span>
+            <span class="font-bold">$350.00</span>
+          </div>
+        </div>
+
+        <!-- Available Upgrades -->
+        <div class="space-y-2.5 pt-1">
+          <span class="text-xs font-bold text-base-content">Available Operational Upgrades</span>
+          
+          <label class="flex items-center justify-between text-xs cursor-pointer hover:opacity-80">
+            <div class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-xs rounded-sm checkbox-neutral" />
+              <span>Extra heavy folding table</span>
+            </div>
+            <span class="font-semibold text-base-content/70">+ $25</span>
+          </label>
+
+          <label class="flex items-center justify-between text-xs cursor-pointer hover:opacity-80">
+            <div class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-xs rounded-sm checkbox-neutral" />
+              <span>Electricity voltage upgrade (240V)</span>
+            </div>
+            <span class="font-semibold text-base-content/70">+ $50</span>
+          </label>
+
+          <label class="flex items-center justify-between text-xs cursor-pointer hover:opacity-80">
+            <div class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-xs rounded-sm checkbox-neutral" />
+              <span>Double corridor corner spot layout</span>
+            </div>
+            <span class="font-semibold text-base-content/70">+ $75</span>
+          </label>
+        </div>
+
+        <!-- Total Price -->
+        <div class="pt-4 border-t border-base-200 flex items-center justify-between">
+          <span class="font-serif font-bold text-base text-base-content">Total Due</span>
+          <span class="font-serif font-bold text-2xl text-base-content">$350.00</span>
+        </div>
+
+      </div>
+
+      <!-- Action Button -->
+      <button type="button" class="btn bg-[#485b57] hover:bg-[#3d4d4a] text-white w-full rounded-xl normal-case font-medium">
+        Continue to Booking Details
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Footer Matching Design -->
+<footer class="bg-[#485b57] text-white/80 py-12 px-6 mt-16 -mx-4 sm:-mx-6 lg:-mx-8">
+  <div class="max-w-6xl mx-auto space-y-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <div class="flex items-center gap-2 text-white">
+          <div class="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center font-bold text-sm">S</div>
+          <span class="font-bold text-lg">Smak Jit</span>
+        </div>
+        <p class="text-xs text-white/60 mt-3 leading-relaxed">
+          Streamlining event operations for volunteers, vendors, and organizers worldwide.
+        </p>
+      </div>
+
+      <div class="space-y-2 text-xs">
+        <h4 class="font-bold text-white uppercase text-[11px] tracking-wider">Platform</h4>
+        <ul class="space-y-1.5 text-white/70">
+          <li><a href="#" class="hover:underline">Find Events</a></li>
+          <li><a href="#" class="hover:underline">For Vendors</a></li>
+          <li><a href="#" class="hover:underline">For Volunteers</a></li>
+          <li><a href="#" class="hover:underline">Host an Event</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-2 text-xs">
+        <h4 class="font-bold text-white uppercase text-[11px] tracking-wider">Resources</h4>
+        <ul class="space-y-1.5 text-white/70">
+          <li><a href="#" class="hover:underline">About Us</a></li>
+          <li><a href="#" class="hover:underline">Blog</a></li>
+          <li><a href="#" class="hover:underline">Help Center</a></li>
+          <li><a href="#" class="hover:underline">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-2 text-xs">
+        <h4 class="font-bold text-white uppercase text-[11px] tracking-wider">Legal</h4>
+        <ul class="space-y-1.5 text-white/70">
+          <li><a href="#" class="hover:underline">Terms of Service</a></li>
+          <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+          <li><a href="#" class="hover:underline">SLA Agreement</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-white/50 gap-4">
+      <p>© 2026 BoothSpot Inc. All rights reserved.</p>
+      <div class="flex items-center gap-3">
+        <span class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center cursor-pointer hover:bg-white/20">𝕏</span>
+        <span class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center cursor-pointer hover:bg-white/20">f</span>
+        <span class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center cursor-pointer hover:bg-white/20">in</span>
+        <span class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center cursor-pointer hover:bg-white/20">📸</span>
+      </div>
+    </div>
+  </div>
+</footer>
+{% endblock %}

@@ -1,0 +1,373 @@
+{% extends 'base.html' %} {% block title %} <title>Manage Event</title>{%
+endblock %} {% block content %}
+<div class="space-y-6 m-10">
+  <!-- Header Banner / Workspace Actions -->
+  <div
+    class="card bg-base-100 border border-base-200 shadow-sm p-6 rounded-2xl flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+  >
+    <div>
+      <h1 class="text-xl font-bold text-base-content">
+        Vendor Workspace Actions
+      </h1>
+      <p class="text-xs text-base-content/60 mt-0.5">
+        Quickly manage your event pipeline, logistics, and assets.
+      </p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2">
+      <a
+        href="{{ url_for('event.manage_event') }}"
+        class="btn btn-neutral btn-sm rounded-lg px-4 font-medium"
+        >Browse Events</a
+      >
+      <button
+        type="button"
+        class="btn btn-ghost btn-sm bg-base-200/70 hover:bg-base-200 text-base-content/80 rounded-lg px-4 font-medium"
+      >
+        Manage Inventory
+      </button>
+      <button
+        type="button"
+        class="btn btn-ghost btn-sm bg-base-200/70 hover:bg-base-200 text-base-content/80 rounded-lg px-4 font-medium"
+      >
+        View Invoices
+      </button>
+    </div>
+  </div>
+
+  <!-- Metric Cards Row -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <!-- Total Revenue -->
+    <div
+      class="card bg-base-100 shadow-sm border border-base-200 p-5 rounded-2xl"
+    >
+      <div class="flex items-center justify-between">
+        <span
+          class="text-[11px] font-bold uppercase tracking-wider text-base-content/60"
+          >Total Revenue</span
+        >
+        <div
+          class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm font-bold"
+        >
+          $
+        </div>
+      </div>
+      <div class="text-2xl font-extrabold mt-2">$12,450</div>
+      <div
+        class="text-xs text-emerald-600 font-medium mt-1 flex items-center gap-1"
+      >
+        <span>↗</span> +18% vs last month
+      </div>
+    </div>
+
+    <!-- Active Bookings -->
+    <div
+      class="card bg-base-100 shadow-sm border border-base-200 p-5 rounded-2xl"
+    >
+      <div class="flex items-center justify-between">
+        <span
+          class="text-[11px] font-bold uppercase tracking-wider text-base-content/60"
+          >Active Bookings</span
+        >
+        <div
+          class="w-8 h-8 rounded-full bg-indigo-50 text-indigo-500 flex items-center justify-center text-sm"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+            />
+          </svg>
+        </div>
+      </div>
+      <div class="text-2xl font-extrabold mt-2">3</div>
+      <div
+        class="text-xs text-emerald-600 font-medium mt-1 flex items-center gap-1"
+      >
+        <span>↗</span> 2 Pending approval
+      </div>
+    </div>
+
+    <!-- Events Attended -->
+    <div
+      class="card bg-base-100 shadow-sm border border-base-200 p-5 rounded-2xl"
+    >
+      <div class="flex items-center justify-between">
+        <span
+          class="text-[11px] font-bold uppercase tracking-wider text-base-content/60"
+          >Events Attended</span
+        >
+        <div
+          class="w-8 h-8 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center text-sm"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div class="text-2xl font-extrabold mt-2">18</div>
+      <div
+        class="text-xs text-emerald-600 font-medium mt-1 flex items-center gap-1"
+      >
+        <span>↗</span> Top performing roster
+      </div>
+    </div>
+
+    <!-- Average Rating -->
+    <div
+      class="card bg-base-100 shadow-sm border border-base-200 p-5 rounded-2xl"
+    >
+      <div class="flex items-center justify-between">
+        <span
+          class="text-[11px] font-bold uppercase tracking-wider text-base-content/60"
+          >Average Rating</span
+        >
+        <div
+          class="w-8 h-8 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-sm"
+        >
+          ★
+        </div>
+      </div>
+      <div class="text-2xl font-extrabold mt-2 flex items-center gap-1">
+        4.8 <span class="text-amber-500 text-lg">★</span>
+      </div>
+      <div
+        class="text-xs text-emerald-600 font-medium mt-1 flex items-center gap-1"
+      >
+        <span>↗</span> Based on 45 reviews
+      </div>
+    </div>
+  </div>
+
+  <!-- Middle Grid: Revenue History & Booth Assignments -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+    <!-- Revenue History Chart Card -->
+    <div
+      class="card bg-base-100 border border-base-200 shadow-sm p-6 rounded-2xl lg:col-span-6 flex flex-col justify-between"
+    >
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-base font-bold text-base-content">Revenue History</h2>
+        <span class="text-xs text-base-content/50 font-medium"
+          >Last 6 Months</span
+        >
+      </div>
+
+      <!-- Pure CSS Bar Chart -->
+      <div class="h-48 flex items-end justify-between gap-3 pt-6 px-4">
+        <!-- May -->
+        <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end">
+          <span class="text-[10px] text-base-content/60 font-semibold"
+            >$1.4k</span
+          >
+          <div
+            class="w-full bg-[#8fa89b] rounded-t-md"
+            style="height: 48%"
+          ></div>
+          <span class="text-xs text-base-content/60 mt-1">May</span>
+        </div>
+
+        <!-- Jun -->
+        <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end">
+          <span class="text-[10px] text-base-content/60 font-semibold"
+            >$1.9k</span
+          >
+          <div
+            class="w-full bg-[#8fa89b] rounded-t-md"
+            style="height: 62%"
+          ></div>
+          <span class="text-xs text-base-content/60 mt-1">Jun</span>
+        </div>
+
+        <!-- Jul -->
+        <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end">
+          <span class="text-[10px] text-base-content/60 font-semibold"
+            >$2.5k</span
+          >
+          <div
+            class="w-full bg-[#8fa89b] rounded-t-md"
+            style="height: 80%"
+          ></div>
+          <span class="text-xs text-base-content/60 mt-1">Jul</span>
+        </div>
+
+        <!-- Aug -->
+        <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end">
+          <span class="text-[10px] text-base-content/60 font-semibold"
+            >$1.4k</span
+          >
+          <div
+            class="w-full bg-[#8fa89b] rounded-t-md"
+            style="height: 45%"
+          ></div>
+          <span class="text-xs text-base-content/60 mt-1">Aug</span>
+        </div>
+
+        <!-- Sep (Peak Month) -->
+        <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end">
+          <span class="text-[10px] text-rose-500 font-bold">$3.1k</span>
+          <div
+            class="w-full bg-[#ad4a54] rounded-t-md"
+            style="height: 100%"
+          ></div>
+          <span class="text-xs text-base-content/60 mt-1 font-semibold"
+            >Sep</span
+          >
+        </div>
+
+        <!-- Oct -->
+        <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end">
+          <span class="text-[10px] text-base-content/60 font-semibold"
+            >$2.2k</span
+          >
+          <div
+            class="w-full bg-[#8fa89b] rounded-t-md"
+            style="height: 70%"
+          ></div>
+          <span class="text-xs text-base-content/60 mt-1">Oct</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upcoming Booth Assignments -->
+    <div
+      class="card bg-base-100 border border-base-200 shadow-sm p-6 rounded-2xl lg:col-span-6 flex flex-col"
+    >
+      <h2 class="text-base font-bold text-base-content mb-4">
+        Upcoming Booth Assignments
+      </h2>
+
+      <div class="space-y-3 flex-1 flex flex-col justify-center">
+        <!-- Booth 1 -->
+        <div
+          class="card bg-base-200/40 border border-base-200 p-3.5 rounded-xl flex-row items-center justify-between"
+        >
+          <div>
+            <div class="font-bold text-xs sm:text-sm">
+              Austin Harvest Fest 2026
+            </div>
+            <div class="text-[11px] text-base-content/60 mt-0.5">
+              Date: Oct 12-14 &nbsp;•&nbsp; Loc:
+              <span class="text-indigo-600 font-medium">Booth A12</span>
+              (10'x10' ft)
+            </div>
+          </div>
+          <span class="badge badge-success badge-soft text-[11px] font-semibold"
+            >Paid</span
+          >
+        </div>
+
+        <!-- Booth 2 -->
+        <div
+          class="card bg-base-200/40 border border-base-200 p-3.5 rounded-xl flex-row items-center justify-between"
+        >
+          <div>
+            <div class="font-bold text-xs sm:text-sm">FutureTech Expo 2026</div>
+            <div class="text-[11px] text-base-content/60 mt-0.5">
+              Date: Nov 06-08 &nbsp;•&nbsp; Loc:
+              <span class="text-indigo-600 font-medium">Booth B02</span>
+              (10'x20' ft)
+            </div>
+          </div>
+          <span class="badge badge-success badge-soft text-[11px] font-semibold"
+            >Paid</span
+          >
+        </div>
+
+        <!-- Booth 3 -->
+        <div
+          class="card bg-base-200/40 border border-base-200 p-3.5 rounded-xl flex-row items-center justify-between"
+        >
+          <div>
+            <div class="font-bold text-xs sm:text-sm">
+              Coastal Sound Festival 2026
+            </div>
+            <div class="text-[11px] text-base-content/60 mt-0.5">
+              Date: Dec 18-20 &nbsp;•&nbsp; Loc:
+              <span class="text-indigo-600 font-medium">Booth C15</span>
+              (10'x10' ft)
+            </div>
+          </div>
+          <span class="badge badge-warning badge-soft text-[11px] font-semibold"
+            >Pending</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Table: Recent Events Ledger & Performance -->
+  <div
+    class="card bg-base-100 border border-base-200 shadow-sm p-6 rounded-2xl"
+  >
+    <h2 class="text-base font-bold text-base-content mb-4">
+      Recent Events Ledger & Performance
+    </h2>
+
+    <div class="overflow-x-auto">
+      <table class="table table-zebra w-full text-xs">
+        <thead>
+          <tr
+            class="text-base-content/50 uppercase border-b border-base-200 text-[10px] tracking-wider"
+          >
+            <th class="py-3">Event</th>
+            <th class="py-3">Date</th>
+            <th class="py-3">Revenue</th>
+            <th class="py-3">Items Sold</th>
+            <th class="py-3 text-right">Rating</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-base-200/50">
+          <!-- Row 1 -->
+          <tr>
+            <td class="font-bold py-3.5 text-base-content">
+              Zilker Arts Park 2025
+            </td>
+            <td class="text-base-content/70">Sep 12, 2025</td>
+            <td class="font-semibold text-emerald-600">$2,450.00</td>
+            <td class="text-base-content/70">84 pcs</td>
+            <td class="text-right font-bold text-amber-500">5.0 ★</td>
+          </tr>
+
+          <!-- Row 2 -->
+          <tr>
+            <td class="font-bold py-3.5 text-base-content">
+              Austin Food & Wine 2025
+            </td>
+            <td class="text-base-content/70">Aug 04, 2025</td>
+            <td class="font-semibold text-emerald-600">$1,890.00</td>
+            <td class="text-base-content/70">62 pcs</td>
+            <td class="text-right font-bold text-amber-500">4.7 ★</td>
+          </tr>
+
+          <!-- Row 3 -->
+          <tr>
+            <td class="font-bold py-3.5 text-base-content">
+              Downtown Summer Showcase
+            </td>
+            <td class="text-base-content/70">Jun 20, 2025</td>
+            <td class="font-semibold text-emerald-600">$3,120.00</td>
+            <td class="text-base-content/70">105 pcs</td>
+            <td class="text-right font-bold text-amber-500">4.9 ★</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,12 +1,19 @@
 {% block sidebar %}
 
-<ul class="menu bg-base-200 min-h-full w-60 p-4 text-xs">
+<ul class="menu bg-[#4A615E] min-h-full w-60 p-4 text-white text-xs">
   <!-- Sidebar content here -->
 
   <li>
-    <a href="{{ url_for('main.index')}}"
-      ><span class="material-symbols-outlined"> home </span>Home</a
-    >
+    <a href="{{ url_for('main.index') }}" class="flex items-center gap-2 mb-10">
+      <div
+        class="w-8 h-8 rounded-lg text-[#4A615E] bg-white flex items-center justify-center font-bold text-sm tracking-tighter"
+      >
+        sj
+      </div>
+      <span class="font-extrabold text-xl tracking-tight text-white"
+        >Smak Jit</span
+      >
+    </a>
   </li>
   <li>
     <a href="{{ url_for('main.dashboard')}}"
@@ -41,7 +48,7 @@
     </div>
     <ul
       tabindex="-1"
-      class="dropdown-content menu bg-base-200 rounded-box z-1 w-40 p-2 shadow-sm"
+      class="dropdown-content menu bg-[#4A615E] rounded-box z-1 w-40 p-2 shadow-xl border-1 border-black"
     >
       <li>
         <a href="{{ url_for('main.profile') }}">

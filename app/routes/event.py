@@ -12,14 +12,16 @@ event = Blueprint('event', __name__)
 @login_required
 def view_event():
     
-    return render_template('views/event.html')
+    return render_template('views/events.html')
+
+
 
 @event.route('/manage')
 @login_required
 @permission_required(['manage_event'])
 def manage_event():
     
-    return render_template('views/event.html')
+    return render_template('views/manage_event.html')
 
 
 @event.route('/new', methods=["GET", 'POST'])
@@ -35,3 +37,4 @@ def create_event():
         categories=all_categories,
         locations=all_locations
     )
+    

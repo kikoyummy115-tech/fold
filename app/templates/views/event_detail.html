@@ -81,21 +81,35 @@
 
         <!-- Right Side Nav -->
         <div class="flex items-center gap-5">
-          <button class="text-slate-600 hover:text-slate-900 cursor-pointer">
-            <span class="material-symbols-outlined text-[20px]">search</span>
-          </button>
-          <a
-            href="{{ url_for('auth.login') if 'auth.login' in url_map else '#' }}"
-            class="text-sm font-semibold text-slate-700 hover:text-slate-900"
-          >
-            Log In
-          </a>
-          <a
-            href="{{ url_for('auth.register') if 'auth.register' in url_map else '#' }}"
-            class="btn brand-teal text-white border-none rounded-lg px-5 min-h-[36px] h-[36px] text-xs font-semibold capitalize shadow-xs"
-          >
-            Sign Up
-          </a>
+          {% if current_user.username %}
+          <a href="{{ url_for('main.dashboard')}}">Dashboard</a>
+          <img
+            src="{% if  current_user.img_url == None%}
+                {{ url_for('static', filename='image/profile.png' ) }}
+              {% else %}
+                {{ current_user.img_url}}
+              {% endif %}"
+            class="h-10 w-10 shrink-0 rounded-full"
+            alt="profile"
+          />{% else %}
+          <div class="flex items-center gap-5">
+            <button class="text-slate-600 hover:text-slate-900">
+              <span class="material-symbols-outlined text-[22px]">search</span>
+            </button>
+            <a
+              href="{{ url_for('auth.login')}}"
+              class="text-sm font-semibold text-slate-700 hover:text-slate-900"
+            >
+              Log In
+            </a>
+            <a
+              href="{{ url_for('auth.register')}}"
+              class="btn brand-teal text-white border-none rounded-lg px-5 min-h-[38px] h-[38px] text-xs font-semibold capitalize shadow-sm"
+            >
+              Sign Up
+            </a>
+          </div>
+          {% endif %}
         </div>
       </div>
     </header>
