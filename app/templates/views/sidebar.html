@@ -28,23 +28,23 @@
 
   {% if current_user.has_permission('manage_event') %}
   <li>
-    <a href="{{ url_for('event.manage_event')}}">
+    <a href="{{ url_for('event.host_event')}}">
+      <span class="material-symbols-outlined"> dynamic_feed </span>My Events
+    </a>
+  </li>
+  <li>
+    <a href="{{ url_for('event.create_event')}}">
       <span class="material-symbols-outlined"> event_available </span>Manage
       Event
     </a>
   </li>
-  {% endif %}
-     {% if current_user.has_permission('manage_service') %}
+  {% endif %} {% if current_user.has_permission('manage_service') %}
   <li>
     <a href="{{ url_for('event.manage_vendor')}}"
-      ><span class="material-symbols-outlined">
-        storefront
-      </span> Manage
-      Vendor
+      ><span class="material-symbols-outlined"> storefront </span> Manage Vendor
     </a>
   </li>
-  {% endif %}
-   {% if current_user.has_permission('manage_role') %}
+  {% endif %} {% if current_user.has_permission('manage_role') %}
   <li>
     <a href="{{ url_for('main.manage_role')}}"
       ><span class="material-symbols-outlined"> manage_accounts </span> Manage

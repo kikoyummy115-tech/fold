@@ -27,7 +27,7 @@ class User(UserMixin ,db.Model):
     #== Interaction ==#    
     authored_events = db.relationship('Event', backref='user')
     
-    volunteer_submissions = db.relationship('VolunteerRequest', backref='user', lazy=True)
+    event_applications = db.relationship('EventApplication', backref='user', lazy=True)
     vendor_bookings = db.relationship('BookVendor', backref='user', lazy=True)
 
 

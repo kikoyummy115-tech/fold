@@ -1,0 +1,407 @@
+{% extends 'base.html' %} {% block title %}
+<title>Manage Event</title>
+{% endblock %} {% block content %}
+<div class="bg-slate-50 text-slate-800 min-h-screen antialiased">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Top Breadcrumb & Header -->
+    <div class="mb-6">
+      <div class="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1
+            class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight"
+          >
+            Create a new event
+          </h1>
+          <p class="text-sm text-slate-500 mt-1">
+            Bring people together. Add your event details, then publish when
+            you're ready.
+          </p>
+          <p class="text-xs text-slate-400 mt-2">
+            Fields marked (*) are required.
+          </p>
+        </div>
+        <span
+          class="badge bg-indigo-50 text-indigo-600 border-indigo-100 font-medium px-3 py-3 text-xs"
+          >Draft</span
+        >
+      </div>
+    </div>
+
+    <!-- Main Form -->
+    <form
+      action="{{ url_for('event.create_event') if url_for is defined else '#' }}"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <!-- Flask CSRF Token support if using Flask-WTF -->
+      {% if csrf_token is defined %}
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      {% endif %}
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+        <!-- LEFT COLUMN (2/3 width on desktop) -->
+        <div class="lg:col-span-2 space-y-6">
+          <!-- 1. Event details -->
+          <div
+            class="card bg-white border border-slate-200/80 shadow-xs rounded-2xl"
+          >
+            <div class="card-body p-6 sm:p-7 space-y-5">
+              <div>
+                <h2 class="text-lg font-bold text-slate-900">Event details</h2>
+                <p class="text-xs text-slate-500 mt-0.5">
+                  Give your event a name and help people discover what makes it
+                  special.
+                </p>
+              </div>
+
+              <!-- Event title -->
+              <div class="form-control w-full">
+                <label class="label pt-0 pb-1.5" for="title">
+                  <span class="label-text font-semibold text-slate-700 text-xs"
+                    >Event title <span class="text-rose-500">*</span></span
+                  >
+                </label>
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  placeholder="e.g. Austin Community Festival"
+                  required
+                  class="input input-bordered w-full bg-white border-slate-200 focus:border-indigo-500 focus:outline-none text-sm h-11"
+                />
+              </div>
+
+              <!-- Category & Event Type -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="form-control w-full">
+                  <label class="label pt-0 pb-1.5" for="category">
+                    <span
+                      class="label-text font-semibold text-slate-700 text-xs"
+                      >Category <span class="text-rose-500">*</span></span
+                    >
+                  </label>
+                  <select
+                    id="category"
+                    name="category"
+                    required
+                    class="select select-bordered w-full bg-white border-slate-200 focus:border-indigo-500 focus:outline-none text-sm font-normal h-11"
+                  >
+                    <option value="" disabled selected>Select category</option>
+                    <option value="music">Music & Concerts</option>
+                    <option value="community">Community & Culture</option>
+                    <option value="tech">Tech & Innovation</option>
+                    <option value="food">Food & Drink</option>
+                    <option value="sports">Sports & Fitness</option>
+                  </select>
+                </div>
+
+                <div class="form-control w-full">
+                  <label class="label pt-0 pb-1.5" for="event_type">
+                    <span
+                      class="label-text font-semibold text-slate-700 text-xs"
+                      >Event type <span class="text-rose-500">*</span></span
+                    >
+                  </label>
+                  <select
+                    id="event_type"
+                    name="event_type"
+                    required
+                    class="select select-bordered w-full bg-white border-slate-200 focus:border-indigo-500 focus:outline-none text-sm font-normal h-11"
+                  >
+                    <option value="" disabled selected>
+                      Select event type
+                    </option>
+                    <option value="festival">Festival</option>
+                    <option value="workshop">Workshop</option>
+                    <option value="conference">Conference</option>
+                    <option value="meetup">Meetup</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Cover image -->
+              <div class="form-control w-full">
+                <label class="label pt-0 pb-1.5">
+                  <span class="label-text font-semibold text-slate-700 text-xs"
+                    >Cover image <span class="text-rose-500">*</span></span
+                  >
+                </label>
+                <label
+                  for="cover_image"
+                  id="dropzone"
+                  class="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-slate-200 rounded-xl cursor-pointer bg-slate-50/40 hover:bg-indigo-50/30 hover:border-indigo-300 transition-colors px-4 text-center"
+                >
+                  <div
+                    id="upload-placeholder"
+                    class="flex flex-col items-center"
+                  >
+                    <i
+                      data-lucide="upload"
+                      class="w-5 h-5 text-indigo-600 mb-2"
+                    ></i>
+                    <p class="text-xs font-semibold text-indigo-600">
+                      Click to upload or drag and drop
+                    </p>
+                    <p class="text-[11px] text-slate-400 mt-1">
+                      JPG, PNG or WebP · Up to 10 MB
+                    </p>
+                    <p class="text-[11px] text-slate-400 mt-0.5">
+                      Recommended: 1920 × 1080 px (16:9)
+                    </p>
+                  </div>
+                  <p
+                    id="file-name-preview"
+                    class="hidden text-xs font-medium text-slate-700"
+                  ></p>
+                  <input
+                    id="cover_image"
+                    name="cover_image"
+                    type="file"
+                    accept="image/png, image/jpeg, image/webp"
+                    class="hidden"
+                  />
+                </label>
+              </div>
+
+              <!-- Description -->
+              <div class="form-control w-full">
+                <label class="label pt-0 pb-1.5" for="description">
+                  <span class="label-text font-semibold text-slate-700 text-xs"
+                    >Description <span class="text-rose-500">*</span></span
+                  >
+                </label>
+                <div
+                  class="border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500"
+                >
+                  <div
+                    class="flex items-center gap-1 px-3 py-2 bg-slate-50/70 border-b border-slate-200 text-slate-600"
+                  >
+                    <button
+                      type="button"
+                      class="btn btn-ghost btn-xs font-bold px-2"
+                    >
+                      B
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-ghost btn-xs italic px-2"
+                    >
+                      I
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-ghost btn-xs underline px-2"
+                    >
+                      U
+                    </button>
+                    <div class="h-3.5 w-[1px] bg-slate-200 mx-1"></div>
+                    <button
+                      type="button"
+                      class="btn btn-ghost btn-xs text-xs font-normal gap-1"
+                    >
+                      <span>• List</span>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-ghost btn-xs text-xs font-normal gap-1"
+                    >
+                      <span>Link</span>
+                    </button>
+                  </div>
+                  <textarea
+                    id="description"
+                    name="description"
+                    rows="4"
+                    minlength="50"
+                    required
+                    placeholder="Tell attendees what to expect: highlights, activities, who it's for, and anything they should bring."
+                    class="textarea w-full border-0 focus:outline-none rounded-none text-sm bg-white resize-y"
+                  ></textarea>
+                </div>
+                <span class="text-[11px] text-slate-400 mt-1.5"
+                  >Make it clear and welcoming. Minimum 50 characters.</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Date & time -->
+          <div
+            class="card bg-white border border-slate-200/80 shadow-xs rounded-2xl"
+          >
+            <div class="card-body p-6 sm:p-7 space-y-5">
+              <div>
+                <h2 class="text-lg font-bold text-slate-900">Date & time</h2>
+                <p class="text-xs text-slate-500 mt-0.5">
+                  Set the schedule so attendees know when to join.
+                </p>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Start Date -->
+                <div class="form-control w-full">
+                  <label class="label pt-0 pb-1.5" for="start_date">
+                    <span
+                      class="label-text font-semibold text-slate-700 text-xs"
+                      >Start date <span class="text-rose-500">*</span></span
+                    >
+                  </label>
+                  <label
+                    class="input input-bordered flex items-center gap-2 bg-white border-slate-200 focus-within:border-indigo-500 h-11"
+                  >
+                    <i
+                      data-lucide="calendar"
+                      class="w-4 h-4 text-slate-400"
+                    ></i>
+                    <input
+                      type="text"
+                      id="start_date"
+                      name="start_date"
+                      placeholder="DD / MM / YYYY"
+                      onfocus="this.type = 'date'"
+                      onblur="if (!this.value) this.type = 'text';"
+                      required
+                      class="grow text-sm"
+                    />
+                  </label>
+                </div>
+
+                <!-- Start Time -->
+                <div class="form-control w-full">
+                  <label class="label pt-0 pb-1.5" for="start_time">
+                    <span
+                      class="label-text font-semibold text-slate-700 text-xs"
+                      >Start time <span class="text-rose-500">*</span></span
+                    >
+                  </label>
+                  <div class="relative">
+                    <select
+                      id="start_time"
+                      name="start_time"
+                      required
+                      class="select select-bordered w-full bg-white border-slate-200 focus:border-indigo-500 focus:outline-none text-sm font-normal h-11 pl-9"
+                    >
+                      <option value="" disabled selected>Select time</option>
+                      <option value="08:00">08:00 AM</option>
+                      <option value="09:00">09:00 AM</option>
+                      <option value="10:00">10:00 AM</option>
+                      <option value="12:00">12:00 PM</option>
+                      <option value="14:00">02:00 PM</option>
+                      <option value="18:00">06:00 PM</option>
+                    </select>
+                    <i
+                      data-lucide="clock"
+                      class="w-4 h-4 text-slate-400 absolute left-3 top-3.5 pointer-events-none"
+                    ></i>
+                  </div>
+                </div>
+
+                <!-- End Date -->
+                <div class="form-control w-full">
+                  <label class="label pt-0 pb-1.5" for="end_date">
+                    <span
+                      class="label-text font-semibold text-slate-700 text-xs"
+                      >End date <span class="text-rose-500">*</span></span
+                    >
+                  </label>
+                  <label
+                    class="input input-bordered flex items-center gap-2 bg-white border-slate-200 focus-within:border-indigo-500 h-11"
+                  >
+                    <i
+                      data-lucide="calendar"
+                      class="w-4 h-4 text-slate-400"
+                    ></i>
+                    <input
+                      type="text"
+                      id="end_date"
+                      name="end_date"
+                      placeholder="DD / MM / YYYY"
+                      onfocus="this.type = 'date'"
+                      onblur="if (!this.value) this.type = 'text';"
+                      required
+                      class="grow text-sm"
+                    />
+                  </label>
+                </div>
+
+                <!-- End Time -->
+                <div class="form-control w-full">
+                  <label class="label pt-0 pb-1.5" for="end_time">
+                    <span
+                      class="label-text font-semibold text-slate-700 text-xs"
+                      >End time <span class="text-rose-500">*</span></span
+                    >
+                  </label>
+                  <div class="relative">
+                    <select
+                      id="end_time"
+                      name="end_time"
+                      required
+                      class="select select-bordered w-full bg-white border-slate-200 focus:border-indigo-500 focus:outline-none text-sm font-normal h-11 pl-9"
+                    >
+                      <option value="" disabled selected>Select time</option>
+                      <option value="10:00">10:00 AM</option>
+                      <option value="12:00">12:00 PM</option>
+                      <option value="15:00">03:00 PM</option>
+                      <option value="17:00">05:00 PM</option>
+                      <option value="21:00">09:00 PM</option>
+                    </select>
+                    <i
+                      data-lucide="clock"
+                      class="w-4 h-4 text-slate-400 absolute left-3 top-3.5 pointer-events-none"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Location -->
+          <div
+            class="card bg-white border border-slate-200/80 shadow-xs rounded-2xl"
+          >
+            <div class="card-body p-6 sm:p-7 space-y-5">
+              <div>
+                <h2 class="text-lg font-bold text-slate-900">Location</h2>
+                <p class="text-xs text-slate-500 mt-0.5">
+                  Let people know where your event is happening.
+                </p>
+              </div>
+
+              <!-- Venue Name -->
+              <div class="form-control w-full">
+                <label class="label pt-0 pb-1.5" for="venue_name">
+                  <span class="label-text font-semibold text-slate-700 text-xs"
+                    >Location <span class="text-rose-500">*</span></span
+                  >
+                </label>
+                <label
+                  class="input input-bordered flex items-center gap-2 bg-white border-slate-200 focus-within:border-indigo-500 h-11"
+                >
+                  <i data-lucide="map-pin" class="w-4 h-4 text-slate-400"></i>
+                  <input
+                    type="text"
+                    id="venue_name"
+                    name="venue_name"
+                    placeholder="e.g. Zilker Metropolitan Park"
+                    class="grow text-sm"
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="bg-[#4A615E] hover:bg-green-800 m-2 p-2 text-white font-semibold rounded-lg flex text-end"
+      >
+        Publish
+      </button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+<script src="{{ url_for('static', filename='js/createEvent.js') }}"></script>
