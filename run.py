@@ -1,9 +1,10 @@
-from flask import render_template
+from flask import render_template, jsonify
 from flask_login import current_user
 from datetime import datetime, timezone
 from app import create_app
 from app.models import User, Role, Permission
 from extension import db
+import os
 
 app = create_app()
 
@@ -39,10 +40,15 @@ def page_not_found(e):
 def internal_server_error(e):
     return render_template('error/500.html'), 500
 
+##=== Keep our app alive
 
+@app.route("/ping", methods=["GET", "HEAD"])
+def ping():
+    return jsonify({"app": "smakjit", "status": "awake"}), 200
 
 # from werkzeug.middleware.profiler import ProfilerMiddleware
 # app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=[30])
 
 if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
     app.run(debug=True)
